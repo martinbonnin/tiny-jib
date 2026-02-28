@@ -261,7 +261,7 @@ abstract class JibService : BuildService<BuildServiceParameters.None> {
             .setAllowInsecureRegistries(extension.allowInsecureRegistries.get())
             .setBaseImageLayersCache(baseImageCachePath)
             .setApplicationLayersCache(applicationCachePath)
-            .apply { extension.to.tags.get().forEach { withAdditionalTag(it) } }
+            .apply { extension.to.tags.orNull?.forEach { withAdditionalTag(it) } }
             .let(jibContainerBuilder::containerize)
 
         val imageDigest = jibContainer.digest.toString()
