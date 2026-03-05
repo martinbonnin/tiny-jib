@@ -6,5 +6,9 @@
       matchUpdateTypes: ["major", "minor"],
       enabled: false,
     },
+    {
+      matchPackageNames: ["dev.gradleplugins:gradle-api"],
+      enabled: false,
+    },
   ],
 }
