@@ -11,7 +11,7 @@ buildscript {
       version {
         // Force the version of the compiler plugin, or the Kotlin BOM
         // upgrades it to an incompatible version.
-        require(libs.versions.kotlin.compiler.get().toString())
+        require(libs.versions.kotlin.compiler.get())
       }
     }
   }
@@ -58,20 +58,6 @@ dependencies {
   implementation(libs.jibCore)
   implementation(libs.guava)
   compileOnly(libs.gradle.api)
-}
-
-/**
- * java-gradle-plugin adds `gradleApi()` to the `api` dependencies, which isn't ideal because:
- * - the user distribution provides the Gradle version.
- * - compiling against an older version of the Gradle API can help us detect invalid API usages.
- *
- * So we remove `gradleApi()` here and instead pull the Nokee redistributed artifact as a compileOnly
- * dependency
- */
-configurations.named("compileOnlyApi").configure {
-  dependencies.removeIf {
-    it is FileCollectionDependency
-  }
 }
 
 gradlePlugin {
